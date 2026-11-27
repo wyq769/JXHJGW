@@ -1,0 +1,192 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --brand: #12507f;
+  --brand-dark: #0b3557;
+  --brand-red: #d6282c;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  color: #111827;
+  background: #ffffff;
+  font-size: 15px;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+
+@layer components {
+  .container-x {
+    @apply mx-auto w-full max-w-site px-5 md:px-6;
+  }
+  .eyebrow {
+    @apply inline-flex items-center gap-2 text-[13px] font-medium tracking-wide text-brand;
+  }
+  .eyebrow::before {
+    content: "";
+    @apply block h-[2px] w-6 bg-brand;
+  }
+  .eyebrow-light {
+    @apply text-[#8FC0E8];
+  }
+  .eyebrow-light::before {
+    @apply bg-[#8FC0E8];
+  }
+  .h1 {
+    @apply text-[32px] leading-[1.2] font-bold md:text-[52px] md:leading-[1.15];
+  }
+  .h2 {
+    @apply text-[25px] leading-[1.3] font-bold md:text-[36px];
+  }
+  .h3 {
+    @apply text-[18px] leading-[1.4] font-semibold md:text-[20px];
+  }
+  .lead {
+    @apply text-[15px] leading-[1.9] text-ink-2 md:text-[16px];
+  }
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-xs px-5 h-11 text-[14px] font-medium transition-colors;
+  }
+  .btn-accent {
+    @apply btn bg-accent text-white hover:bg-accent-dark;
+  }
+  .btn-primary {
+    @apply btn bg-brand text-white hover:bg-brand-dark;
+  }
+  .btn-outline {
+    @apply btn border border-line bg-white text-ink hover:border-brand hover:text-brand;
+  }
+  .btn-ghost {
+    @apply btn border border-white/60 text-white hover:bg-white hover:text-brand-dark;
+  }
+  .card {
+    @apply rounded-xs border border-line bg-white shadow-[0_1px_2px_rgba(17,24,39,0.04)] transition-all;
+  }
+  .card-hover {
+    @apply hover:-translate-y-1 hover:border-brand/30 hover:shadow-[0_22px_48px_-28px_rgba(18,80,127,0.45)];
+  }
+  .tag {
+    @apply inline-flex items-center rounded-xs bg-soft px-2 py-[2px] text-[12px] text-ink-2;
+  }
+  .tag-brand {
+    @apply inline-flex items-center rounded-xs bg-brand-tint px-2 py-[2px] text-[12px] text-brand;
+  }
+  .num {
+    font-family: "DIN Alternate", "Bahnschrift", "Oswald", system-ui, sans-serif;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.01em;
+  }
+  .section {
+    @apply py-16 md:py-24;
+  }
+  .prose-cn p {
+    @apply mb-4 leading-[1.95] text-ink-2;
+  }
+  .spec-table {
+    @apply w-full border-collapse text-[13px];
+  }
+  .spec-table thead th {
+    @apply whitespace-nowrap border-b border-line bg-soft px-3 py-3 text-left font-semibold text-ink;
+  }
+  .spec-table tbody td {
+    @apply whitespace-nowrap border-b border-line px-3 py-[10px] text-ink-2;
+  }
+  .spec-table tbody tr:hover td {
+    @apply bg-brand-tint/60 text-ink;
+  }
+}
+
+.hero-grid {
+  background-image: linear-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+.hero-mask {
+  background: radial-gradient(120% 120% at 15% 20%, rgba(12, 58, 96, 0.96) 0%, rgba(8, 42, 68, 0.98) 55%, #062338 100%);
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+@keyframes floatIn {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.anim-in {
+  animation: floatIn 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+/* ---------- 视觉密度增强：影像位、深色带、数字 ---------- */
+
+.media {
+  position: relative;
+  overflow: hidden;
+  border-radius: 4px;
+  background: #e7edf4;
+}
+
+.media-img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  transition: transform 0.8s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.media:hover .media-img {
+  transform: scale(1.05);
+}
+
+/* 没有实拍图时的工业纹理占位，比纯灰块更像"设计过的位置" */
+.media-ph {
+  background-color: #e3e9f1;
+  background-image: repeating-linear-gradient(
+      135deg,
+      rgba(18, 80, 127, 0.075) 0 1px,
+      transparent 1px 11px
+    ),
+    radial-gradient(120% 120% at 18% 8%, #f5f8fb 0%, #e0e7ef 55%, #ccd7e2 100%);
+}
+
+.media-ph::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.55), transparent 45%, rgba(8, 42, 68, 0.08));
+  pointer-events: none;
+}
+
+/* 深色带：解决方案、案例等区块用它制造明暗节奏 */
+.band-dark {
+  background: radial-gradient(120% 100% at 10% 0%, #0f4a73 0%, #0a3454 48%, #062338 100%);
+}
+
+.glow-brand {
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.08) inset, 0 30px 60px -40px rgba(0, 0, 0, 0.8);
+}
+
+.stat-k {
+  font-family: "DIN Alternate", "Bahnschrift", "Oswald", system-ui, sans-serif;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.005em;
+}
+
+.hairline {
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.28), rgba(255, 255, 255, 0));
+  height: 1px;
+}
