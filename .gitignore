@@ -18,3 +18,6 @@ _contracts/
 .DS_Store
 Thumbs.db
 *.tsbuildinfo
+
+# 本机部署用 SSH 私钥（不得入库）
+_keys/
